@@ -26,4 +26,21 @@ const createOrganization = async (req,res) => {
     }
 };
 
-module.exports = {createOrganization};
+const getOrganizations = async (req, res) => {
+    try {
+        const organizations = await Organization.find();
+
+        return res.status(200).json({
+            message: "Organizations fetched successfully.",
+            organizations,
+        });
+    } catch (error) {
+        console.error(error);
+
+        return res.status(500).json({
+            message: "Internal Server Error",
+        });
+    }
+};
+
+module.exports = {createOrganization,getOrganizations};

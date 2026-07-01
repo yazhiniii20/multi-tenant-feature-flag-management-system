@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const {createOrganization} = require("../controllers/organizationController.js");
+const {createOrganization,getOrganizations} = require("../controllers/organizationController.js");
+const {verifyJwt} = require("../middleware/authMiddleware.js");
 
-router.post("/",createOrganization);
+router.post("/",verifyJwt,createOrganization);
+router.get("/",verifyJwt,getOrganizations);
 
 module.exports = router;

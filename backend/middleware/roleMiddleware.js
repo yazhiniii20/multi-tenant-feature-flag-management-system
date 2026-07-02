@@ -6,4 +6,12 @@ const isSuperAdmin = (req,res,next) => {
      }
      return next();
 };
-module.exports = {isSuperAdmin};
+const isOrgAdmin = (req,res,next) => {
+  if(req.user.role !== "ORG_ADMIN"){
+    return res.status(403).json({
+        message : "Access Denied"
+    });
+  }
+  return next();
+};
+module.exports = {isSuperAdmin,isOrgAdmin};
